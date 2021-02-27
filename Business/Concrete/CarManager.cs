@@ -18,12 +18,14 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
-        }
-
-        public void Delete(Car car)
-        {
-            _carDal.Delete(car);
+            if (car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine("Günlük Kira 0'dan büyük olmalı.");
+            }
         }
 
         public List<Car> GetAll()
@@ -31,14 +33,14 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public Car GetById(int carId)
+        public List<Car> GetAllByBrandId(int brandId)
         {
-            return _carDal.GetById(carId);
+            return _carDal.GetAll(c => c.BrandId == brandId);
         }
 
-        public void Update(Car car)
+        public List<Car> GetAllByColorId(int colorId)
         {
-            _carDal.Update(car);
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
     }
 }

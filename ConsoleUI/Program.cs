@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -9,33 +10,49 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-            Console.WriteLine("##GET ALL##");
-            GetAllCars(carManager);
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            //brandManager.Add(new Brand { Name = "Volvo" });
+            //brandManager.Add(new Brand { Name = "BMW" });
+            //brandManager.Add(new Brand { Name = "Mazda" });
 
-            Console.WriteLine("##GET BY ID##");
-            var selectedCar = carManager.GetById(2);
-            Console.WriteLine("Your car is: " + selectedCar.BrandId + " " + selectedCar.ModelYear);
+            foreach (var brand in brandManager.GetAll())
+            {
+                Console.WriteLine(brand.Id + ": " + brand.Name);
+            }
 
-            Console.WriteLine("##ADD##");
-            carManager.Add(new Car { Id = 6, BrandId = 3, ColorId = 2, ModelYear = 2021, DailyPrice = 1500, Description = "Sport" });
-            GetAllCars(carManager);
+            Console.WriteLine("---");
 
-            Console.WriteLine("##UPDATE##");
-            carManager.Update(new Car { Id = 6, BrandId = 3, ColorId = 2, ModelYear = 2021, DailyPrice = 750, Description = "Sedan" });
-            GetAllCars(carManager);
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            //colorManager.Add(new Color { Name = "Beyaz" });
+            //colorManager.Add(new Color { Name = "Kırmızı" });
+            //colorManager.Add(new Color { Name = "Mavi" });
 
-            Console.WriteLine("##DELETE##");
-            carManager.Delete(new Car { Id = 6, BrandId = 3, ColorId = 2, ModelYear = 2021, DailyPrice = 750, Description = "Sedan" });
-            GetAllCars(carManager);
-        }
+            foreach (var color in colorManager.GetAll())
+            {
+                Console.WriteLine(color.Id + ": " + color.Name);
+            }
 
-        private static void GetAllCars(CarManager carManager)
-        {
+            Console.WriteLine("---");
+
+            CarManager carManager = new CarManager(new EfCarDal());
+            //carManager.Add(new Car { BrandId = 1, ColorId = 3, ModelYear = 2021, DailyPrice = 350, Description = "Hatchback" });
+            //carManager.Add(new Car { BrandId = 2, ColorId = 2, ModelYear = 2020, DailyPrice = 400, Description = "Sedan" });
+            //carManager.Add(new Car { BrandId = 3, ColorId = 1, ModelYear = 2021, DailyPrice = 325, Description = "SUV" });
+            carManager.Add(new Car { BrandId = 1, ColorId = 3, ModelYear = 2020, DailyPrice = 0, Description = "Hatchback" });
+
             foreach (var car in carManager.GetAll())
             {
                 Console.WriteLine(car.Id + " - " + car.BrandId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.DailyPrice + " - " + car.Description);
             }
+
+            Console.WriteLine("---");
+
+            Console.WriteLine("by brand");
+            foreach (var car in carManager.GetAllByBrandId(1))
+            {
+                Console.WriteLine(car.Id + " - " + car.BrandId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.DailyPrice + " - " + car.Description);
+            }
+
         }
     }
 }
