@@ -14,6 +14,7 @@ namespace ConsoleUI
             //brandManager.Add(new Brand { Name = "Volvo" });
             //brandManager.Add(new Brand { Name = "BMW" });
             //brandManager.Add(new Brand { Name = "Mazda" });
+            //brandManager.Add(new Brand { Name = "Toyota" });
 
             foreach (var brand in brandManager.GetAll())
             {
@@ -26,6 +27,7 @@ namespace ConsoleUI
             //colorManager.Add(new Color { Name = "Beyaz" });
             //colorManager.Add(new Color { Name = "Kırmızı" });
             //colorManager.Add(new Color { Name = "Mavi" });
+            //colorManager.Add(new Color { Name = "Gri" });
 
             foreach (var color in colorManager.GetAll())
             {
@@ -38,19 +40,27 @@ namespace ConsoleUI
             //carManager.Add(new Car { BrandId = 1, ColorId = 3, ModelYear = 2021, DailyPrice = 350, Description = "Hatchback" });
             //carManager.Add(new Car { BrandId = 2, ColorId = 2, ModelYear = 2020, DailyPrice = 400, Description = "Sedan" });
             //carManager.Add(new Car { BrandId = 3, ColorId = 1, ModelYear = 2021, DailyPrice = 325, Description = "SUV" });
-            carManager.Add(new Car { BrandId = 1, ColorId = 3, ModelYear = 2020, DailyPrice = 0, Description = "Hatchback" });
+            //carManager.Add(new Car { BrandId = 1, ColorId = 3, ModelYear = 2020, DailyPrice = 0, Description = "Hatchback" });
+            //carManager.Add(new Car { BrandId = 4, ColorId = 4, ModelYear = 2021, DailyPrice = 370, Description = "Sedan" });
 
             foreach (var car in carManager.GetAll())
             {
                 Console.WriteLine(car.Id + " - " + car.BrandId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.DailyPrice + " - " + car.Description);
             }
 
-            Console.WriteLine("---");
+            //Console.WriteLine("---");
 
-            Console.WriteLine("by brand");
-            foreach (var car in carManager.GetAllByBrandId(1))
+            //Console.WriteLine("by brand");
+            //foreach (var car in carManager.GetAllByBrandId(1))
+            //{
+            //    Console.WriteLine(car.Id + " - " + car.BrandId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.DailyPrice + " - " + car.Description);
+            //}
+
+
+            Console.WriteLine("---");
+            foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.Id + " - " + car.BrandId + " - " + car.ColorId + " - " + car.ModelYear + " - " + car.DailyPrice + " - " + car.Description);
+                Console.WriteLine(car.CarId + " - " + car.BrandName + " - " + car.ColorName + " - " + car.DailyPrice);
             }
 
         }
