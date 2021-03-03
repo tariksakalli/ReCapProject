@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,21 +18,21 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
-            if (brand.Name.Length >= 2)
+            if (brand.Name.Length < 2)
             {
-                _brandDal.Add(brand);
+                return new ErrorResult(Messages.ProdcutNameInvalid);
             }
-            else
-            {
-                Console.WriteLine("Marka en az 2 karakter olmalı.");
-            }
+
+            _brandDal.Add(brand);
+
+            return new SuccessResult(Messages.RecordAdded);
         }
 
-        public List<Brand> GetAll()
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.GetAll();
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
     }
 }
