@@ -22,7 +22,7 @@ namespace Business.Concrete
         {
             if (brand.Name.Length < 2)
             {
-                return new ErrorResult(Messages.ProdcutNameInvalid);
+                return new ErrorResult(Messages.NameInvalid);
             }
 
             _brandDal.Add(brand);

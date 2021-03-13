@@ -23,7 +23,7 @@ namespace Business.Concrete
         {
             if (car.DailyPrice <= 0)
             {
-                return new ErrorResult(Messages.ProductPricaInvalid);
+                return new ErrorResult(Messages.ProductPriceInvalid);
             }
 
             _carDal.Add(car);
